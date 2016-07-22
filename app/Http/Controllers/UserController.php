@@ -13,6 +13,10 @@ class UserController extends Controller
         return view('dashboard');
     }
 
+    public function getHome(Request $request){
+        return view('welcome');
+    }
+
     public function postSignUp(Request $request){
 
         $this->validate($request, [

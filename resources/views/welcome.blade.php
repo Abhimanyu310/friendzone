@@ -36,7 +36,7 @@
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="gender" id="male" value="male">Male
+                        <input type="radio" name="gender" id="male" value="male" checked>Male
                     </label>
                     <label>
                         <input type="radio" name="gender" id="female" value="female">Female
@@ -49,7 +49,7 @@
 
         <div class="col-md-6">
             <h3>Sign In</h3>
-            <form action="" method="post">
+            <form action="{{ route('signin') }}" method="post">
                 <div class="form-group">
                     <label for="email">Your E-Mail</label>
                     <input class="form-control" type="text" name="email" id="email">

@@ -15,6 +15,14 @@ class UserController extends Controller
 
     public function postSignUp(Request $request){
 
+        $this->validate($request, [
+            'first_name' => 'required|max:120',
+            'last_name' => 'required|max:120',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'birth_date' => 'required',
+            'gender' => 'required'
+        ]);
         $first_name = $request['first_name'];
         $last_name = $request['last_name'];
         $email = $request['email'];
@@ -37,6 +45,11 @@ class UserController extends Controller
 
     }
     public function postSignIn(Request $request){
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
         if(Auth::attempt([
             'email' => $request['email'],
             'password' => $request['password']

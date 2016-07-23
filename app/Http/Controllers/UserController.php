@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function getDashboard(Request $request){
-        return view('dashboard');
-    }
+    
 
     public function getHome(Request $request){
         return view('welcome');

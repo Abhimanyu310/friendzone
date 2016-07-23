@@ -61,7 +61,8 @@
 
                 <div class="form-group {{ $errors->has('birth_date') ? 'has-error' : '' }}">
                     <label for="birth_date">Birth date</label>
-                    <input class="form-control" type="date" name="birth_date" id="birth_date">
+                    <input class="form-control" type="date" name="birth_date" id="birth_date"
+                           value="{{ Request::old('birth_date') }}">
                     @if ($errors->has('birth_date'))
                         <span class="help-block">{{$errors->first('birth_date')}}</span>
                     @endif

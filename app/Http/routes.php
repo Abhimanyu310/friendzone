@@ -15,6 +15,8 @@
 //    return view('welcome');
 //})->name('home');
 
+use Illuminate\Http\Request;
+
 Route::get('/', [
     'uses' => 'UserController@getHome',
     'as' => 'home',
@@ -51,5 +53,11 @@ Route::post('/createpost', [
 Route::get('/delete-post/{post_id}', [
     'uses' => 'PostController@getDeletePost',
     'as' => 'post.delete',
+    'middleware' => 'auth'
+]);
+
+Route::post('/edit', [
+    'uses' => 'PostController@postEditPost',
+    'as' => 'edit',
     'middleware' => 'auth'
 ]);

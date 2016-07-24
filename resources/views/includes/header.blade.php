@@ -37,16 +37,23 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('account') }}">Account</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{ route('logout') }}">Logout</a></li>
-                    </ul>
-                </li>
+                @if(Auth::user())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {{ $user->first_name }}
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <span class="caret" aria-hidden="true"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('account') }}">Account</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                @endif
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

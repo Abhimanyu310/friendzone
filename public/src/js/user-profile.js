@@ -86,3 +86,19 @@ $('.remove-friend').on('click', function (event) {
             location.reload();
         });
 })
+
+
+
+// function accept_request(event){
+//     event.preventDefault();
+//     acceptButton = event.target;
+//     var friendId = acceptButton.parentNode.dataset['userid'];
+//     $.ajax({
+//             method: 'POST',
+//             url: urlAcceptRequest,
+//             data: {friendId: friendId, _token: token}
+//         })
+//         .done(function() {
+//             location.reload();
+//         });
+// }

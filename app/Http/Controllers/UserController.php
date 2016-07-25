@@ -170,7 +170,16 @@ class UserController extends Controller
     }
 
     public function getUpdates(){
-        return view('accounts.zone-updates');
+        $user = Auth::user();
+        $friend_requests = FriendRequest::where('user2', $user->id)->get();
+        $user_requests = array();
+        foreach ($friend_requests as $friend_request){
+            $user_id = $friend_request->user1;
+            $user = User::find($user_id);
+            $user_requests[$user->id] = [$user->first_name, $user->last_name];
+//            array_push($user_requests, $user);
+        }
+        return view('accounts.zone-updates', ['user_requests' => $user_requests]);
     }
 
 

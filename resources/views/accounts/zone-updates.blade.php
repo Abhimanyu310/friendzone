@@ -5,13 +5,25 @@
 @endsection
 
 @section('content')
+
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <h3>Zone requests</h3>
-                <div class="well">
-                    asda
-                </div>
+                @foreach($user_requests as $user_id => $user_name)
+                    <div class="well" data-userid="{{ $user_id }}">
+                        <a href="{{ route('user-profile',
+                        ['user_id' => $user_id]) }}">{{ $user_name[0] }}
+                            {{ $user_name[1] }}</a> wants to add you to their zone
+                        <button type="button" class="btn btn-success btn-sm accept">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </div>
+                @endforeach
+
             </div>
 
             <div class="col-md-6">
@@ -22,4 +34,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var token = '{{ Session::token() }}';
+        var urlDeleteRequest = '{{ route('delete.request') }}';
+        var urlAcceptRequest = '{{ route('accept.request') }}';
+
+    </script>
+
 @endsection
+
+@section('styles')
+    <script src="{{ URL::to('src/js/user-profile.js') }}"></script>
+@endsection
+
+

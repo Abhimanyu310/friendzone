@@ -55,8 +55,34 @@ $('.delete-request').on('click', function (event) {
         .done(function() {
             location.reload();
         });
+})
 
-
+$('.accept').on('click', function (event) {
+    event.preventDefault();
+    acceptButton = event.target;
+    var friendId = acceptButton.parentNode.dataset['userid'];
+    $.ajax({
+            method: 'POST',
+            url: urlAcceptRequest,
+            data: {friendId: friendId, _token: token}
+        })
+        .done(function() {
+            location.reload();
+        });
 })
 
 
+
+$('.remove-friend').on('click', function (event) {
+    event.preventDefault();
+    removeButton = event.target;
+    var friendId = removeButton.parentNode.dataset['userid'];
+    $.ajax({
+            method: 'POST',
+            url: urlRemoveFriend,
+            data: {friendId: friendId, _token: token}
+        })
+        .done(function() {
+            location.reload();
+        });
+})

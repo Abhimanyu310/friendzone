@@ -92,9 +92,9 @@ Route::get('/user-profile/{user_id?}',[
     'middleware' => 'auth'
 ]);
 
-Route::get('/add-friend/{friend_id}', [
-    'uses' => 'UserController@postAddFriend',
-    'as' => 'add.friend',
+Route::post('/accept-request', [
+    'uses' => 'UserController@postAcceptRequest',
+    'as' => 'accept.request',
     'middleware' => 'auth'
 ]);
 
@@ -104,7 +104,7 @@ Route::post('/send-friend-request', [
     'middleware' => 'auth'
 ]);
 
-Route::get('/remove-friend/{friend_id}', [
+Route::post('/remove-friend', [
     'uses' => 'UserController@postRemoveFriend',
     'as' => 'remove.friend',
     'middleware' => 'auth'

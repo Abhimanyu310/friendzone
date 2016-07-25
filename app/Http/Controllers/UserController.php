@@ -106,11 +106,11 @@ class UserController extends Controller
         return view('accounts.user-profile', ['user' => $auth_user]);
     }
 
-    public function postRemoveFriend($friend_id){
+    public function postRemoveFriend(Request $request){
         $user = Auth::user();
-        $user->friendsOfMine()->detach($friend_id);
-        $user->friendOf()->detach($friend_id);
-        return redirect()->route('dashboard');
+        $user->friendsOfMine()->detach($request['friendId']);
+        $user->friendOf()->detach($request['friendId']);
+        return response()->json(200);
     }
 
     public function postFriendRequest(Request $request){
@@ -121,6 +121,15 @@ class UserController extends Controller
         $friend_request->save();
         return response()->json(200);
     }
+
+    public function postAcceptRequest(Request $request){    // do not accept the request
+        $user = Auth::user();
+        $friend_request = FriendRequest::where(['user2' => $user->id, 'user1' => $request['friendId']]);
+        $friend_request->delete();
+        $user->friendsOfMine()->attach($request['friendId']);
+        return response()->json(200);
+    }
+
 
     public function postCancelRequest(Request $request){    // cancel own request
         $user = Auth::user();
@@ -134,12 +143,6 @@ class UserController extends Controller
         $friend_request = FriendRequest::where(['user2' => $user->id, 'user1' => $request['friendId']]);
         $friend_request->delete();
         return response()->json(200);
-    }
-
-    public function postAddFriend($friend_id){
-        $user = Auth::user();
-        $user->friendsOfMine()->attach($friend_id);
-        return redirect()->route('dashboard');
     }
 
     protected function friendship_status($user1, $user2){

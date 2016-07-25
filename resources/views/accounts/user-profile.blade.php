@@ -91,6 +91,8 @@
         var urlFriendRequest = '{{ route('friend.request') }}';
         var urlCancelRequest = '{{ route('cancel.request') }}';
         var urlDeleteRequest = '{{ route('delete.request') }}';
+        var urlAcceptRequest = '{{ route('accept.request') }}';
+        var urlRemoveFriend = '{{ route('remove.friend') }}';
 
     </script>
 

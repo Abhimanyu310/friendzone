@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -21,11 +20,16 @@
                     <div class="info">
                         <div class="title" data-userid="{{ $user->id }}">
                             {{ $user->first_name }} {{ $user->last_name }}
+                            <br>
                             @if(Auth::user()->id != $user->id)
-                                @if($friendship)
-                                    <button type="button" class="btn btn-danger">Remove Friend</button>
+                                @if($friendship == 2)
+                                    <button type="button" class="btn btn-danger remove-friend">Remove from zone</button>
+                                @elseif($friendship == 0)
+                                    <button type="button" class="btn btn-info add-friend">Add to Zone</button>
                                 @else
-                                    <button type="button" class="btn btn-info" id="add-friend">Add Friend</button>
+                                    <button type="button" class="btn btn-warning pending">Zone request pending</button>
+                                    <button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>
+
                                 @endif
 
                             @endif

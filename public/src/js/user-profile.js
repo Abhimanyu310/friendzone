@@ -5,7 +5,7 @@ $(document).ready(function() {
     });
 });
 
-$('#add-friend').on('click', function (event) {
+$('.add-friend').on('click', function (event) {
     event.preventDefault();
     addButton = event.target;
     var friendId = addButton.parentNode.dataset['userid'];
@@ -15,8 +15,10 @@ $('#add-friend').on('click', function (event) {
             data: {friendId: friendId, _token: token}
         })
         .done(function() {
-            addButton.innerText = 'Friend Request Sent';
-            $(addButton).removeClass("btn-info").addClass("btn-warning")
+            addButton.innerText = 'Zone request pending';
+            $(addButton).removeClass("btn-info").addClass("btn-warning");
+            var cancelButton = '<button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>';
+            $(cancelButton).insertAfter(addButton);
         });
 
 

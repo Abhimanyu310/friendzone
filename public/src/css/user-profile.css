@@ -240,4 +240,8 @@
     margin-bottom: 17px;
 }
 
+.pending, .add-friend, .remove-friend, .cancel-request {
+    margin-top: 5px;
+
+}
 

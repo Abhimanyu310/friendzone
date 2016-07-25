@@ -111,4 +111,15 @@ class UserController extends Controller
         }
         return view('accounts.user-profile', ['user' => $auth_user]);
     }
+
+    public function postRemoveFriend($friend_id){
+
+    }
+
+    public function postAddFriend($friend_id){
+        $user = Auth::user();
+        $user->friendsOfMine()->attach($friend_id);
+        return redirect()->route('dashboard');
+    }
+
 }

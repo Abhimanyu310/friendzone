@@ -86,3 +86,8 @@ Route::get('/user-profile/{user_id?}',[
     'middleware' => 'auth'
 ]);
 
+Route::get('/add-friend/{friend_id}', [
+    'uses' => 'UserController@postAddFriend',
+    'as' => 'add.friend',
+    'middleware' => 'auth'
+]);

@@ -32,7 +32,7 @@
                                     <button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>
                                 @else()
                                     <button type="button" class="btn btn-warning accept">Accept Zone request</button>
-                                    <button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>
+                                    <button type="button" class="btn btn-danger delete-request">Delete zone request</button>
 
                                 @endif
 
@@ -89,6 +89,8 @@
     <script>
         var token = '{{ Session::token() }}';
         var urlFriendRequest = '{{ route('friend.request') }}';
+        var urlCancelRequest = '{{ route('cancel.request') }}';
+        var urlDeleteRequest = '{{ route('delete.request') }}';
 
     </script>
 

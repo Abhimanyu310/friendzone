@@ -240,7 +240,7 @@
     margin-bottom: 17px;
 }
 
-.pending, .add-friend, .remove-friend, .cancel-request, .zoned, .accept {
+.pending, .add-friend, .remove-friend, .cancel-request, .zoned, .accept, .delete-request {
     margin-top: 5px;
 
 }

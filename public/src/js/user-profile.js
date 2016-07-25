@@ -15,11 +15,48 @@ $('.add-friend').on('click', function (event) {
             data: {friendId: friendId, _token: token}
         })
         .done(function() {
-            addButton.innerText = 'Zone request pending';
-            $(addButton).removeClass("btn-info").addClass("btn-warning");
-            var cancelButton = '<button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>';
-            $(cancelButton).insertAfter(addButton);
+            location.reload();
+            // addButton.innerText = 'Zone request pending';
+            // $(addButton).removeClass("btn-info").addClass("btn-warning");
+            // var cancelButton = '<button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>';
+            // $(cancelButton).insertAfter(addButton);
         });
 
 
 })
+
+
+
+$('.cancel-request').on('click', function (event) {
+    event.preventDefault();
+    cancelButton = event.target;
+    var friendId = cancelButton.parentNode.dataset['userid'];
+    $.ajax({
+            method: 'POST',
+            url: urlCancelRequest,
+            data: {friendId: friendId, _token: token}
+        })
+        .done(function() {
+            location.reload();
+        });
+
+
+})
+
+$('.delete-request').on('click', function (event) {
+    event.preventDefault();
+    deleteButton = event.target;
+    var friendId = deleteButton.parentNode.dataset['userid'];
+    $.ajax({
+            method: 'POST',
+            url: urlDeleteRequest,
+            data: {friendId: friendId, _token: token}
+        })
+        .done(function() {
+            location.reload();
+        });
+
+
+})
+
+

@@ -109,3 +109,15 @@ Route::get('/remove-friend/{friend_id}', [
     'as' => 'remove.friend',
     'middleware' => 'auth'
 ]);
+
+Route::post('/cancel-friend-request', [
+    'uses' => 'UserController@postCancelRequest',
+    'as' => 'cancel.request',
+    'middleware' => 'auth'
+]);
+
+Route::post('/delete-friend-request', [
+    'uses' => 'UserController@postDeleteRequest',
+    'as' => 'delete.request',
+    'middleware' => 'auth'
+]);

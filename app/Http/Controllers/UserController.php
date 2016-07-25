@@ -122,6 +122,20 @@ class UserController extends Controller
         return response()->json(200);
     }
 
+    public function postCancelRequest(Request $request){    // cancel own request
+        $user = Auth::user();
+        $friend_request = FriendRequest::where(['user1' => $user->id, 'user2' => $request['friendId']]);
+        $friend_request->delete();
+        return response()->json(200);
+    }
+
+    public function postDeleteRequest(Request $request){    // do not accept the request
+        $user = Auth::user();
+        $friend_request = FriendRequest::where(['user2' => $user->id, 'user1' => $request['friendId']]);
+        $friend_request->delete();
+        return response()->json(200);
+    }
+
     public function postAddFriend($friend_id){
         $user = Auth::user();
         $user->friendsOfMine()->attach($friend_id);

@@ -70,7 +70,7 @@ class UserController extends Controller
     }
 
     public function getAccount(){
-        return view('account', ['user' => Auth::user()]);
+        return view('accounts.account-settings', ['user' => Auth::user()]);
     }
 
     public function postSaveAccount(Request $request){
@@ -91,5 +91,13 @@ class UserController extends Controller
     public function getUserImage($filename){
         $file = Storage::disk('local')->get($filename);
         return new Response($file, 200);
+    }
+    
+    public function getUserProfile($user_id = null){
+        $user = Auth::user();
+        if(!is_null($user_id)){
+            $user = User::find($user_id);
+        }
+        return view('accounts.user-profile', ['user' => $user]);
     }
 }

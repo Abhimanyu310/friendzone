@@ -11,11 +11,8 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//})->name('home');
 
-use Illuminate\Http\Request;
+
 
 Route::get('/', [
     'uses' => 'UserController@getHome',
@@ -82,3 +79,10 @@ Route::post('/like', [
     'as' => 'like',
     'middleware' => 'auth'
 ]);
+
+Route::get('/user-profile/{user_id?}',[
+    'uses' => 'UserController@getUserProfile',
+    'as' => 'user-profile',
+    'middleware' => 'auth'
+]);
+

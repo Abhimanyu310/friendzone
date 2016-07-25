@@ -4,3 +4,20 @@ $(document).ready(function() {
         $(this).removeClass("btn-default").addClass("btn-primary");
     });
 });
+
+$('#add-friend').on('click', function (event) {
+    event.preventDefault();
+    addButton = event.target;
+    var friendId = addButton.parentNode.dataset['userid'];
+    $.ajax({
+            method: 'POST',
+            url: urlFriendRequest,
+            data: {friendId: friendId, _token: token}
+        })
+        .done(function() {
+            addButton.innerText = 'Friend Request Sent';
+            $(addButton).removeClass("btn-info").addClass("btn-warning")
+        });
+
+
+})

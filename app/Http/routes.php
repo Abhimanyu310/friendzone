@@ -91,3 +91,9 @@ Route::get('/add-friend/{friend_id}', [
     'as' => 'add.friend',
     'middleware' => 'auth'
 ]);
+
+Route::post('/send-friend-request', [
+    'uses' => 'UserController@postFriendRequest',
+    'as' => 'friend.request',
+    'middleware' => 'auth'
+]);

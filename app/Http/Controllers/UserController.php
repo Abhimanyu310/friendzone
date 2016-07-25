@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\FriendRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    
+
 
     public function getHome(Request $request){
         return view('welcome');
@@ -113,6 +114,17 @@ class UserController extends Controller
     }
 
     public function postRemoveFriend($friend_id){
+
+    }
+
+    public function postFriendRequest(Request $request){
+        $user = Auth::user();
+        $friend_request = new FriendRequest();
+        $friend_request->user1 = $user->id;
+        $friend_request->user2 = $request['friendId'];
+        $friend_request->save();
+        return response()->json(200);
+
 
     }
 

@@ -19,13 +19,13 @@
                     </div>
 
                     <div class="info">
-                        <div class="title">
+                        <div class="title" data-userid="{{ $user->id }}">
                             {{ $user->first_name }} {{ $user->last_name }}
                             @if(Auth::user()->id != $user->id)
                                 @if($friendship)
                                     <button type="button" class="btn btn-danger">Remove Friend</button>
                                 @else
-                                    <button type="button" class="btn btn-info">Add Friend</button>
+                                    <button type="button" class="btn btn-info" id="add-friend">Add Friend</button>
                                 @endif
 
                             @endif
@@ -77,6 +77,13 @@
 
         </div>
     </div>
+
+    <script>
+        var token = '{{ Session::token() }}';
+        var urlFriendRequest = '{{ route('friend.request') }}';
+
+    </script>
+
 @endsection
 
 @section('styles')

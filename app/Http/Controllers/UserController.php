@@ -94,10 +94,21 @@ class UserController extends Controller
     }
     
     public function getUserProfile($user_id = null){
-        $user = Auth::user();
+        $auth_user = Auth::user();
         if(!is_null($user_id)){
-            $user = User::find($user_id);
+            $other_user = User::find($user_id);
+            $user_friends = $auth_user->friends;
+            $friendship = false;
+            foreach ($user_friends as $friend){
+                if($friend->id == $other_user->id){
+                    $friendship = true;
+                    break;
+                }
+            }
+            return view('accounts.user-profile', [
+                'user' => $other_user, 'friendship' => $friendship
+            ]);
         }
-        return view('accounts.user-profile', ['user' => $user]);
+        return view('accounts.user-profile', ['user' => $auth_user]);
     }
 }

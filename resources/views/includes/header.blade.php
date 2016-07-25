@@ -45,8 +45,8 @@
                             <span class="caret" aria-hidden="true"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('account') }}">Account</a></li>
-                            <li><a href="#">Another action</a></li>
+                            <li><a href="{{ route('user-profile') }}">Profile</a></li>
+                            <li><a href="{{ route('account') }}">Account Settings</a></li>
                             <li><a href="#">Something else here</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>

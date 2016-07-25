@@ -99,14 +99,6 @@ class UserController extends Controller
         if(!is_null($user_id)){
             $other_user = User::find($user_id);
             $friendship = $this->friendship_status($auth_user, $other_user);
-//            $user_friends = $auth_user->friends;
-//            $friendship = false;
-//            foreach ($user_friends as $friend){
-//                if($friend->id == $other_user->id){
-//                    $friendship = true;
-//                    break;
-//                }
-//            }
             return view('accounts.user-profile', [
                 'user' => $other_user, 'friendship' => $friendship
             ]);
@@ -128,8 +120,6 @@ class UserController extends Controller
         $friend_request->user2 = $request['friendId'];
         $friend_request->save();
         return response()->json(200);
-
-
     }
 
     public function postAddFriend($friend_id){
@@ -139,25 +129,32 @@ class UserController extends Controller
     }
 
     protected function friendship_status($user1, $user2){
-        $friendship = 0;
+        $friendship = 0;    // no one has added the other
         $user1_friends = $user1->friends;
         foreach ($user1_friends as $friend){
             if($friend->id == $user2->id){
-                $friendship = 2;
+                $friendship = 2;        // two users are friends
                 return $friendship;
             }
         }
-        $result = FriendRequest::where(['user1' => $user1->id, 'user2' => $user2->id])
-            ->orWhere(['user1' => $user2->id, 'user2' => $user1->id])
-            ->get();
+        $result = FriendRequest::where(['user1' => $user1->id, 'user2' => $user2->id])->get();
         if (count($result)  != 0){
-            $friendship = 1;
+            $friendship = 1;        // user 1 has pending request to user 2
+            return $friendship;
+        }
+
+        $result = FriendRequest::where(['user1' => $user2->id, 'user2' => $user1->id])->get();
+        if (count($result)  != 0){
+            $friendship = 3;    // user 2 has pending request to user 1
             return $friendship;
         }
         return $friendship;
 
     }
 
+    public function getUpdates(){
+        return view('accounts.zone-updates');
+    }
 
 
 }

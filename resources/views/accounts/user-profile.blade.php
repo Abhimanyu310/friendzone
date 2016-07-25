@@ -27,8 +27,11 @@
                                     <button type="button" class="btn btn-danger remove-friend">Remove from zone</button>
                                 @elseif($friendship == 0)
                                     <button type="button" class="btn btn-info add-friend">Add to Zone</button>
-                                @else
+                                @elseif($friendship == 1)
                                     <button type="button" class="btn btn-warning pending">Zone request pending</button>
+                                    <button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>
+                                @else()
+                                    <button type="button" class="btn btn-warning accept">Accept Zone request</button>
                                     <button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>
 
                                 @endif

@@ -46,8 +46,9 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('user-profile') }}">Profile</a></li>
+                            <li><a href="{{ route('zone.updates') }}">Zone Updates</a></li>
                             <li><a href="{{ route('account') }}">Account Settings</a></li>
-                            <li><a href="#">Something else here</a></li>
+
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         </ul>

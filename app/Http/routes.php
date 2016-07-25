@@ -50,6 +50,12 @@ Route::get('/userimage/{filename}', [
     'as' => 'account.image'
 ]);
 
+Route::get('/notifications', [
+    'uses' => 'UserController@getUpdates',
+    'as' => 'zone.updates',
+    'middleware' => 'auth'
+]);
+
 Route::get('/dashboard', [
     'uses' => 'PostController@getDashboard',
     'as' => 'dashboard',

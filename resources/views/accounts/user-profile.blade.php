@@ -23,6 +23,7 @@
                             <br>
                             @if(Auth::user()->id != $user->id)
                                 @if($friendship == 2)
+                                    <button type="button" class="btn btn-success zoned">Zoned</button>
                                     <button type="button" class="btn btn-danger remove-friend">Remove from zone</button>
                                 @elseif($friendship == 0)
                                     <button type="button" class="btn btn-info add-friend">Add to Zone</button>

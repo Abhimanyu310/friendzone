@@ -115,7 +115,10 @@ class UserController extends Controller
     }
 
     public function postRemoveFriend($friend_id){
-
+        $user = Auth::user();
+        $user->friendsOfMine()->detach($friend_id);
+        $user->friendOf()->detach($friend_id);
+        return redirect()->route('dashboard');
     }
 
     public function postFriendRequest(Request $request){

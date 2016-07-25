@@ -97,3 +97,9 @@ Route::post('/send-friend-request', [
     'as' => 'friend.request',
     'middleware' => 'auth'
 ]);
+
+Route::get('/remove-friend/{friend_id}', [
+    'uses' => 'UserController@postRemoveFriend',
+    'as' => 'remove.friend',
+    'middleware' => 'auth'
+]);

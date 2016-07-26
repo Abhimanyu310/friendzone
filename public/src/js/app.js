@@ -13,6 +13,11 @@ $('.post').find('.edit').on('click', function (event) {
     $('#edit-modal').modal();
 });
 
+
+
+
+
+
 $('#modal-save').on('click', function () {
     $.ajax({
             method: 'POST',
@@ -44,3 +49,4 @@ $('.like').on('click', function(event) {
             }
         });
 });
+

@@ -20,17 +20,34 @@
             <header><h3>What other people say...</h3></header>
             @foreach($posts as $post)
                 <article class="post" data-postid="{{ $post->id }}">
-                    <p>{{ $post->body }}</p>
-                    <div class="info">
-                        Posted by {{ $post->user->first_name }} on {{ $post->created_at }}
+                    <div class="media">
+                        <div class="pull-left">
+                            <img class="media-object img-circle" src="http://placehold.it/64x64" alt="">
+                        </div>
+                        <div class="media-body">
+                            <p>
+                                <a href="{{ route('user-profile', ['user_id' => $post->user->id]) }}">
+                                    {{ $post->user->first_name }} {{ $post->user->last_name }}
+                                </a>
+                                <div class="info">
+                                    Posted on {{ $post->created_at }}
+                                </div>
+
+                            </p>
+
+                        </div>
                     </div>
+
+                    <p class="post-body">{{ $post->body }}</p>
+
                     <div class="interaction">
                         <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
                          Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You liked this post'
                           : 'Like' : 'Like' }}</a> |
                         <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
                          Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You disliked this post'
-                          : 'Dislike' : 'Dislike' }}</a>
+                          : 'Dislike' : 'Dislike' }}</a> |
+                        <a href="#commentstoggle{{ $post->id }}" class="comments" data-toggle="collapse">Comments</a>
                         @if(Auth::user() == $post->user)
                             |
                             <a href="#" class="edit">Edit</a> |
@@ -39,7 +56,45 @@
 
 
                     </div>
+
+
+                    <div class="collapse" id="commentstoggle{{ $post->id }}">
+                        <div class="well">
+
+                            @foreach($post->comments as $comment)
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <img class="media-object img-circle" src="http://placehold.it/64x64" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>
+                                            <a href="{{ route('user-profile', ['user_id' => $comment->user->id]) }}">
+                                                {{ $comment->user->first_name }} {{ $comment->user->last_name }}
+                                            </a>
+                                            {{ $comment->body }}
+                                            <small class="pull-right text-muted">{{ $comment->created_at }}</small>
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <hr>
+                            @endforeach
+
+
+
+                            <h4>Leave a Comment:</h4>
+                            <form method="post" action="{{ route('add.comment') }}">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" name="body"></textarea>
+                                    <input type="hidden" name="postId" value="{{ $post->id }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Comment</button>
+                                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                            </form>
+                        </div>
+                    </div>
                 </article>
+
             @endforeach
         </div>
     </section>
@@ -47,7 +102,8 @@
 
 
 
-    <!-- Modal -->
+
+    <!--Edit Modal -->
     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -68,6 +124,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script>
         var token = '{{ Session::token() }}';

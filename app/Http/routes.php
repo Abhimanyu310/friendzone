@@ -121,3 +121,9 @@ Route::post('/delete-friend-request', [
     'as' => 'delete.request',
     'middleware' => 'auth'
 ]);
+
+Route::post('/add-comment', [
+    'uses' => 'CommentController@postAddComment',
+    'as' => 'add.comment',
+    'middleware' => 'auth'
+]);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\FriendRequest;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,21 @@ class UserController extends Controller
     }
 
     public function postSignUp(Request $request){
+
+        $recaptcha_token = $request['g-recaptcha-response'];
+        if ($recaptcha_token){
+            $guzzle_client = new Client();
+            $recaptcha_response = $guzzle_client->post('https://www.google.com/recaptcha/api/siteverify', [
+                'form_params' => array(
+                    'secret' => '6Lf_ACYTAAAAAJFGWKZsRWE8vjk3iqDSFnMpA-qW',
+                    'response' => $recaptcha_token
+                )
+            ]);
+            $result = json_decode($recaptcha_response->getBody()->getContents());
+            if(!$result->success){      // verification failed
+                return redirect()->back();
+            }
+        }
 
         $this->validate($request, [
             'first_name' => 'required|max:120',

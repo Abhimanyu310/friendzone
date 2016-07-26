@@ -4,6 +4,10 @@
     Welcome!
 @endsection
 
+@section('styles-head')
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+@endsection
+
 @section('content')
 
     @if($errors->has('password'))
@@ -20,7 +24,7 @@
     <div class="row">
         <div class="col-md-6">
             <h3>Sign Up</h3>
-            <form action="{{ route('signup') }}" method="post">
+            <form action="{{ route('signup') }}" method="post" id="sign-up">
 
                 <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                     <label for="first_name">First Name</label>
@@ -77,6 +81,7 @@
                                 {{ Request::old('gender') == 'female' ? 'checked' : ''}}>Female
                     </label>
                 </div>
+                <div class="g-recaptcha" data-sitekey="6Lf_ACYTAAAAAMUEx3t-LEwCJ_EH8XBbcFEUR2Li"></div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
             </form>
@@ -100,4 +105,8 @@
     </div>
 
 
+@endsection
+
+@section('styles')
+    <script src="{{ URL::to('src/js/recaptcha.js') }}"></script>
 @endsection

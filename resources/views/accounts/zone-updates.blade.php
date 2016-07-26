@@ -5,7 +5,8 @@
 @endsection
 
 @section('content')
-
+{{--TODO fix bug for accepting and deleting requests using ajax--}}
+{{--TODO Add Notifications stuff..Controller--}}
     <div class="container">
         <div class="row">
             <div class="col-md-6">

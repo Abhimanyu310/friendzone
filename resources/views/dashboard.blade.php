@@ -40,14 +40,22 @@
 
                     <p class="post-body">{{ $post->body }}</p>
 
+{{--TODO improve like/dislike logic--}}
+
                     <div class="interaction">
-                        <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
+                        <a href="#" class="like"><span class="glyphicon glyphicon-thumbs-up"></span>
+                            {{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
                          Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You liked this post'
-                          : 'Like' : 'Like' }}</a> |
-                        <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
+                          : 'Like' : 'Like' }}
+                        </a> |
+                        <a href="#" class="like"><span class="glyphicon glyphicon-thumbs-down"></span>
+                            {{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
                          Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You disliked this post'
-                          : 'Dislike' : 'Dislike' }}</a> |
-                        <a href="#commentstoggle{{ $post->id }}" class="comments" data-toggle="collapse">Comments</a>
+                          : 'Dislike' : 'Dislike' }}
+                        </a> |
+                        <a href="#commentstoggle{{ $post->id }}" class="comments" data-toggle="collapse">
+                            <span class="glyphicon glyphicon-comment"></span> Comments
+                        </a>
                         @if(Auth::user() == $post->user)
                             |
                             <a href="#" class="edit">Edit</a> |
@@ -80,9 +88,6 @@
                                 <hr>
                             @endforeach
 
-
-
-                            <h4>Leave a Comment:</h4>
                             <form method="post" action="{{ route('add.comment') }}">
                                 <div class="form-group">
                                     <textarea class="form-control" rows="3" name="body"></textarea>

@@ -133,3 +133,10 @@ Route::post('/add-comment', [
     'as' => 'add.comment',
     'middleware' => 'auth'
 ]);
+
+Route::post('/add-delete', [
+    'uses' => 'CommentController@postDeleteComment',
+    'as' => 'delete.comment',
+    'middleware' => 'auth'
+]);
+

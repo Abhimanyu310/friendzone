@@ -67,9 +67,17 @@
 
 
                     <div class="collapse" id="commentstoggle{{ $post->id }}">
-                        <div class="well">
-
+                        <div class="well" data-postid="{{ $post->id }}">
+                            <form method="post">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" id="comment-body{{ $post->id }}"></textarea>
+                                    <input type="hidden" name="postId" value="{{ $post->id }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary add-comment">Add Comment</button>
+                                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                            </form>
                             @foreach($post->comments as $comment)
+                                <hr>
                                 <div class="media">
                                     <div class="pull-left">
                                         <img class="media-object img-circle" src="http://placehold.it/64x64" alt="">
@@ -80,22 +88,23 @@
                                                 {{ $comment->user->first_name }} {{ $comment->user->last_name }}
                                             </a>
                                             {{ $comment->body }}
-                                            <small class="pull-right text-muted">{{ $comment->created_at }}</small>
+                                            <div class="info" data-commentid="{{ $comment->id }}">
+                                                @if($comment->user->id === Auth::user()->id)
+                                                    <small><a href="" class="delete-comment">Delete</a></small>
+                                                @endif
+                                                <small class="pull-right text-muted">{{ $comment->created_at }}</small>
+                                            </div>
+
+
+
                                         </p>
 
                                     </div>
                                 </div>
-                                <hr>
+
                             @endforeach
 
-                            <form method="post" action="{{ route('add.comment') }}">
-                                <div class="form-group">
-                                    <textarea class="form-control" rows="3" name="body"></textarea>
-                                    <input type="hidden" name="postId" value="{{ $post->id }}">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Add Comment</button>
-                                <input type="hidden" name="_token" value="{{ Session::token() }}">
-                            </form>
+
                         </div>
                     </div>
                 </article>
@@ -136,7 +145,16 @@
         var token = '{{ Session::token() }}';
         var urlEdit = '{{ route('edit') }}';
         var urlLike = '{{ route('like') }}';
+        var urlDislike = '{{ route('dislike') }}';
+        var urlAddComment = '{{ route('add.comment') }}';
+        var urlDeleteComment = '{{ route('delete.comment') }}';
+        var urlAuthUserProfile = '{{ route('user-profile') }}';
+        var urlAuthUserImage = '';
     </script>
 
 
+@endsection
+
+@section('styles')
+    <script src="{{ URL::to('src/js/comment.js') }}"></script>
 @endsection

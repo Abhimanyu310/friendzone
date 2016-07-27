@@ -26,6 +26,21 @@ class CommentController extends Controller
         $comment->post()->associate($post);
         $comment->save();
 
-        return redirect()->route('dashboard')->with(['message' => 'Success']);
+        return response()->json([
+            'body' => $comment->body,
+            'created_at' => $comment->created_at,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name
+        ], 200);
+    }
+
+    public function postDeleteComment(Request $request){
+        $comment_id = $request['commentId'];
+        $comment = Comment::find($comment_id);
+        if (!$comment){
+            return null;
+        }
+        $comment->delete();
+        return response()->json(200);
     }
 }

@@ -86,6 +86,12 @@ Route::post('/like', [
     'middleware' => 'auth'
 ]);
 
+Route::post('/dislike', [
+    'uses' => 'PostController@postDislikePost',
+    'as' => 'dislike',
+    'middleware' => 'auth'
+]);
+
 Route::get('/user-profile/{user_id?}',[
     'uses' => 'UserController@getUserProfile',
     'as' => 'user-profile',

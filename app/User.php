@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model implements Authenticatable
 {
     use \Illuminate\Auth\Authenticatable;
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     public function posts(){
         return $this->hasMany('App\Post');
@@ -15,6 +18,10 @@ class User extends Model implements Authenticatable
 
     public function likes(){
         return $this->hasMany('App\Like');
+    }
+
+    public function dislikes(){
+        return $this->hasMany('App\Dislike');
     }
 
     public function comments(){

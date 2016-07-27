@@ -16,11 +16,8 @@ class CreateFriendRequestsTable extends Migration
         Schema::create('friend_requests', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('user1')->unsigned();
-            $table->integer('user2')->unsigned();
-
-            $table->foreign('user2')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('user1')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user1');
+            $table->integer('user2');
         });
     }
 

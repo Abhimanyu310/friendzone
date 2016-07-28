@@ -5,7 +5,8 @@ var postBodyElement = null;
 $('.post').find('.edit').on('click', function (event) {
     event.preventDefault();
 
-    postBodyElement = event.target.parentNode.parentNode.childNodes[1];
+    postBodyElement = event.target.parentNode.previousElementSibling;
+
     var postBody = postBodyElement.textContent;
     postId = event.target.parentNode.parentNode.dataset['postid'];
 

@@ -115,7 +115,6 @@
 
 
 
-{{--TODO Bug in edit post, and check textare div--}}
     <!--Edit Modal -->
     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

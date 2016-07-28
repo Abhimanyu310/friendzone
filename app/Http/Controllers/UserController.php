@@ -135,7 +135,7 @@ class UserController extends Controller
         return response()->json(200);
     }
 
-    public function postAcceptRequest(Request $request){    // do not accept the request
+    public function postAcceptRequest(Request $request){    // accept the request
         $user = Auth::user();
         $user->receivedRequests()->detach($request['friendId']);
         $user->friendsOfMine()->attach($request['friendId']);

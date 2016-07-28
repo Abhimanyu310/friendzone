@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-{{--TODO fix bug for accepting and deleting requests using ajax--}}
 {{--TODO Add Notifications stuff..Controller--}}
     <div class="container">
         <div class="row">
@@ -16,11 +15,11 @@
                         <a href="{{ route('user-profile',
                         ['user_id' => $user_id]) }}">{{ $user_name[0] }}
                             {{ $user_name[1] }}</a> wants to add you to their zone
-                        <button type="button" class="btn btn-success btn-sm accept">
-                            <span class="glyphicon glyphicon-ok"></span>
+                        <button type="button" class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-ok accept-request-notification"></span>
                         </button>
                         <button type="button" class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove"></span>
+                            <span class="glyphicon glyphicon-remove delete-request-notification"></span>
                         </button>
                     </div>
                 @endforeach
@@ -46,7 +45,7 @@
 @endsection
 
 @section('styles')
-    <script src="{{ URL::to('src/js/user-profile.js') }}"></script>
+    <script src="{{ URL::to('src/js/zone-updates.js') }}"></script>
 @endsection
 
 

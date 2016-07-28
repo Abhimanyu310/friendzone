@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 $('.add-friend').on('click', function (event) {
     event.preventDefault();
-    addButton = event.target;
+    var addButton = event.target;
     var friendId = addButton.parentNode.dataset['userid'];
     $.ajax({
             method: 'POST',
@@ -16,10 +16,6 @@ $('.add-friend').on('click', function (event) {
         })
         .done(function() {
             location.reload();
-            // addButton.innerText = 'Zone request pending';
-            // $(addButton).removeClass("btn-info").addClass("btn-warning");
-            // var cancelButton = '<button type="button" class="btn btn-danger cancel-request">Cancel zone request</button>';
-            // $(cancelButton).insertAfter(addButton);
         });
 
 
@@ -29,7 +25,7 @@ $('.add-friend').on('click', function (event) {
 
 $('.cancel-request').on('click', function (event) {
     event.preventDefault();
-    cancelButton = event.target;
+    var cancelButton = event.target;
     var friendId = cancelButton.parentNode.dataset['userid'];
     $.ajax({
             method: 'POST',
@@ -45,7 +41,7 @@ $('.cancel-request').on('click', function (event) {
 
 $('.delete-request').on('click', function (event) {
     event.preventDefault();
-    deleteButton = event.target;
+    var deleteButton = event.target;
     var friendId = deleteButton.parentNode.dataset['userid'];
     $.ajax({
             method: 'POST',
@@ -59,7 +55,7 @@ $('.delete-request').on('click', function (event) {
 
 $('.accept').on('click', function (event) {
     event.preventDefault();
-    acceptButton = event.target;
+    var acceptButton = event.target;
     var friendId = acceptButton.parentNode.dataset['userid'];
     $.ajax({
             method: 'POST',
@@ -75,7 +71,7 @@ $('.accept').on('click', function (event) {
 
 $('.remove-friend').on('click', function (event) {
     event.preventDefault();
-    removeButton = event.target;
+    var removeButton = event.target;
     var friendId = removeButton.parentNode.dataset['userid'];
     $.ajax({
             method: 'POST',
@@ -89,16 +85,4 @@ $('.remove-friend').on('click', function (event) {
 
 
 
-// function accept_request(event){
-//     event.preventDefault();
-//     acceptButton = event.target;
-//     var friendId = acceptButton.parentNode.dataset['userid'];
-//     $.ajax({
-//             method: 'POST',
-//             url: urlAcceptRequest,
-//             data: {friendId: friendId, _token: token}
-//         })
-//         .done(function() {
-//             location.reload();
-//         });
-// }
+

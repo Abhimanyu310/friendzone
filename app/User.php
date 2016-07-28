@@ -28,6 +28,19 @@ class User extends Model implements Authenticatable
         return $this->hasMany('App\Comment');
     }
 
+    function sentRequests()
+    {
+        return $this->belongsToMany('App\User', 'friend_requests', 'user1', 'user2');
+
+    }
+
+    function receivedRequests()
+    {
+        return $this->belongsToMany('App\User', 'friend_requests', 'user2', 'user1');
+
+    }
+
+
 
     // friendship that I started
     function friendsOfMine()

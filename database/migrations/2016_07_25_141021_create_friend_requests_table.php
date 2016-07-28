@@ -12,7 +12,6 @@ class CreateFriendRequestsTable extends Migration
      */
     public function up()
     {
-//        TODO Add relations and use relations to fetch/associate data n all instead of finding.
         Schema::create('friend_requests', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();

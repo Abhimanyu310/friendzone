@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use App\FriendRequest;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -165,13 +164,13 @@ class UserController extends Controller
                 return $friendship;
             }
         }
-        $result = FriendRequest::where(['user1' => $user1->id, 'user2' => $user2->id])->get();
+        $result = $user1->sentRequests()->where('user2', $user2->id)->first();
         if (count($result)  != 0){
             $friendship = 1;        // user 1 has pending request to user 2
             return $friendship;
         }
 
-        $result = FriendRequest::where(['user1' => $user2->id, 'user2' => $user1->id])->get();
+        $result = $user2->sentRequests()->where('user2', $user1->id)->first();
         if (count($result)  != 0){
             $friendship = 3;    // user 2 has pending request to user 1
             return $friendship;
@@ -182,13 +181,12 @@ class UserController extends Controller
 
     public function getUpdates(){
         $user = Auth::user();
-        $friend_requests = FriendRequest::where('user2', $user->id)->get();
+        $friend_requests = $user->receivedRequests()->get();
         $user_requests = array();
         foreach ($friend_requests as $friend_request){
-            $user_id = $friend_request->user1;
+            $user_id = $friend_request->id;
             $user = User::find($user_id);
             $user_requests[$user->id] = [$user->first_name, $user->last_name];
-//            array_push($user_requests, $user);
         }
         return view('accounts.zone-updates', ['user_requests' => $user_requests]);
     }

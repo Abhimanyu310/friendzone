@@ -110,7 +110,6 @@ Route::post('/send-friend-request', [
     'middleware' => 'auth'
 ]);
 
-
 Route::post('/remove-friend', [
     'uses' => 'UserController@postRemoveFriend',
     'as' => 'remove.friend',

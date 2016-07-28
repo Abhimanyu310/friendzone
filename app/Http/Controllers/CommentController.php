@@ -29,7 +29,7 @@ class CommentController extends Controller
         return response()->json([
             'body' => $comment->body,
             'id' => $comment->id,
-            'created_at' => $comment->created_at,
+            'created_at' => $comment->created_at->diffForHumans(),
             'first_name' => $user->first_name,
             'last_name' => $user->last_name
         ], 200);

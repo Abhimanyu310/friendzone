@@ -19,7 +19,7 @@ $('.add-comment').on('click', function(event) {
             new_comment += '<div class="info" data-commentid="' + comment.id + '">';
             new_comment += '<small class="delete-this" class="delete-comment">';
             new_comment += '<a href="" class="delete-comment">Delete</a></small>';
-            new_comment += '<small class="pull-right text-muted">' + comment.created_at.date + '</small>'
+            new_comment += '<small class="pull-right text-muted">' + comment.created_at + '</small>'
             new_comment += '</p></div></div>';
             var animated_comment = $(new_comment).hide().fadeIn(500);
             $(formElement).append(animated_comment);

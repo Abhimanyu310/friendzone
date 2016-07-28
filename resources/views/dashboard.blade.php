@@ -30,7 +30,7 @@
                                     {{ $post->user->first_name }} {{ $post->user->last_name }}
                                 </a>
                                 <div class="info">
-                                    Posted on {{ $post->created_at }}
+                                    Posted {{ $post->created_at->diffForHumans() }}
                                 </div>
 
                             </p>
@@ -91,7 +91,7 @@
                                                 @if($comment->user->id === Auth::user()->id || $comment->post->user->id === Auth::user()->id)
                                                     <small class="delete-this"><a href="" class="delete-comment">Delete</a></small>
                                                 @endif
-                                                <small class="pull-right text-muted">{{ $comment->created_at }}</small>
+                                                <small class="pull-right text-muted">{{ $comment->created_at->diffForHumans() }}</small>
                                             </div>
 
 

@@ -31,22 +31,54 @@ $('#modal-save').on('click', function () {
         });
 });
 
+
 $('.like').on('click', function(event) {
     event.preventDefault();
     postId = event.target.parentNode.parentNode.dataset['postid'];
-    var isLike = event.target.previousElementSibling == null;
+    var likeElement = event.target;
+    var dislikeElement = event.target.nextElementSibling.nextElementSibling;
+
     $.ajax({
             method: 'POST',
             url: urlLike,
-            data: {isLike: isLike, postId: postId, _token: token}
+            data: {postId: postId, _token: token}
         })
-        .done(function() {
-            event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this post' : 'Like' : event.target.innerText == 'Dislike' ? 'You don\'t like this post' : 'Dislike';
-            if (isLike) {
-                event.target.nextElementSibling.innerText = 'Dislike';
-            } else {
-                event.target.previousElementSibling.innerText = 'Like';
+        .done(function(obj) {
+            if(obj.status === 'liked'){
+                likeElement.innerText = 'You liked this';
+                if(obj.toggle){
+                    dislikeElement.innerText = 'Dislike';
+                }
             }
+            else if(obj.status === 'unliked'){
+                likeElement.innerText = 'Like';
+            }
+
         });
 });
 
+$('.dislike').on('click', function(event) {
+    event.preventDefault();
+    postId = event.target.parentNode.parentNode.dataset['postid'];
+    var dislikeElement = event.target;
+    var likeElement = event.target.previousElementSibling.previousElementSibling;
+    console.log(likeElement);
+
+    $.ajax({
+            method: 'POST',
+            url: urlDislike,
+            data: {postId: postId, _token: token}
+        })
+        .done(function(obj) {
+            if(obj.status === 'disliked'){
+                dislikeElement.innerText = 'You disliked this';
+                if(obj.toggle){
+                    likeElement.innerText = 'Like';
+                }
+            }
+            else if(obj.status === 'undisliked'){
+                dislikeElement.innerText = 'Dislike';
+            }
+
+        });
+});

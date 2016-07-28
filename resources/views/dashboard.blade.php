@@ -40,19 +40,18 @@
 
                     <p class="post-body">{{ $post->body }}</p>
 
-{{--TODO improve like/dislike logic--}}
 
                     <div class="interaction">
-                        <a href="#" class="like"><span class="glyphicon glyphicon-thumbs-up"></span>
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                        <a href="#" class="like">
                             {{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
-                         Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You liked this post'
-                          : 'Like' : 'Like' }}
-                        </a> |
-                        <a href="#" class="like"><span class="glyphicon glyphicon-thumbs-down"></span>
-                            {{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
-                         Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You disliked this post'
-                          : 'Dislike' : 'Dislike' }}
-                        </a> |
+                            'You liked this' : 'Like'}}
+                        </a> ({{ $post->likes()->count() }})  |
+                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                        <a href="#" class="dislike">
+                            {{ Auth::user()->dislikes()->where('post_id', $post->id)->first() ?
+                            'You disliked this' : 'Dislike'}}
+                        </a> ({{ $post->dislikes()->count() }})  |
                         <a href="#commentstoggle{{ $post->id }}" class="comments" data-toggle="collapse">
                             <span class="glyphicon glyphicon-comment"></span> Comments
                         </a>

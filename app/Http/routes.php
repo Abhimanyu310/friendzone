@@ -13,7 +13,7 @@
 
 
 
-
+// User Controller
 Route::get('/', [
     'uses' => 'UserController@getHome',
     'as' => 'home',
@@ -56,6 +56,16 @@ Route::get('/notifications', [
     'middleware' => 'auth'
 ]);
 
+Route::get('/user-profile/{user_id?}',[
+    'uses' => 'UserController@getUserProfile',
+    'as' => 'user-profile',
+    'middleware' => 'auth'
+]);
+
+
+
+
+// Post Controller
 Route::get('/dashboard', [
     'uses' => 'PostController@getDashboard',
     'as' => 'dashboard',
@@ -92,42 +102,45 @@ Route::post('/dislike', [
     'middleware' => 'auth'
 ]);
 
-Route::get('/user-profile/{user_id?}',[
-    'uses' => 'UserController@getUserProfile',
-    'as' => 'user-profile',
-    'middleware' => 'auth'
-]);
 
+
+
+
+// Friend Controller
 Route::post('/accept-request', [
-    'uses' => 'UserController@postAcceptRequest',
+    'uses' => 'FriendController@postAcceptRequest',
     'as' => 'accept.request',
     'middleware' => 'auth'
 ]);
 
 Route::post('/send-friend-request', [
-    'uses' => 'UserController@postFriendRequest',
+    'uses' => 'FriendController@postFriendRequest',
     'as' => 'friend.request',
     'middleware' => 'auth'
 ]);
 
 Route::post('/remove-friend', [
-    'uses' => 'UserController@postRemoveFriend',
+    'uses' => 'FriendController@postRemoveFriend',
     'as' => 'remove.friend',
     'middleware' => 'auth'
 ]);
 
 Route::post('/cancel-friend-request', [
-    'uses' => 'UserController@postCancelRequest',
+    'uses' => 'FriendController@postCancelRequest',
     'as' => 'cancel.request',
     'middleware' => 'auth'
 ]);
 
 Route::post('/delete-friend-request', [
-    'uses' => 'UserController@postDeleteRequest',
+    'uses' => 'FriendController@postDeleteRequest',
     'as' => 'delete.request',
     'middleware' => 'auth'
 ]);
 
+
+
+
+// Comment Controller
 Route::post('/add-comment', [
     'uses' => 'CommentController@postAddComment',
     'as' => 'add.comment',

@@ -67,7 +67,7 @@
 
 
                     <div class="collapse" id="commentstoggle{{ $post->id }}">
-                        <div class="well" data-postid="{{ $post->id }}">
+                        <div class="well post-comments" data-postid="{{ $post->id }}">
                             <form method="post">
                                 <div class="form-group">
                                     <textarea class="form-control" rows="3" id="comment-body{{ $post->id }}"></textarea>
@@ -89,8 +89,8 @@
                                             </a>
                                             {{ $comment->body }}
                                             <div class="info" data-commentid="{{ $comment->id }}">
-                                                @if($comment->user->id === Auth::user()->id)
-                                                    <small><a href="" class="delete-comment">Delete</a></small>
+                                                @if($comment->user->id === Auth::user()->id || $comment->post->user->id === Auth::user()->id)
+                                                    <small class="delete-this"><a href="" class="delete-comment">Delete</a></small>
                                                 @endif
                                                 <small class="pull-right text-muted">{{ $comment->created_at }}</small>
                                             </div>
@@ -116,7 +116,7 @@
 
 
 
-
+{{--TODO Bug in edit post, and check textare div--}}
     <!--Edit Modal -->
     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

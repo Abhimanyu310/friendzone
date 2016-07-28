@@ -21,7 +21,7 @@ $('.add-comment').on('click', function(event) {
             $(formElement).append(new_comment);
         });
 });
-//TODO clear textarea and add delete button when comment added with ajax
+//TODO clear textarea and add delete button when comment added with ajax and use fade animation...
 $('.delete-comment').on('click', function(event) {
     event.preventDefault();
     var commentIdElement = event.target.parentNode.parentNode;
